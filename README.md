@@ -8,4 +8,4 @@ https://celix-apps.github.io/shiftmate/
   Android repo); regenerate the page from there instead of editing the texts by hand.
 - `img/<lang>/01.jpg … 06.jpg`: the first six store screenshots per language, 720×1280.
 
-App Store button shows "coming soon" until the iOS app is live; then replace it with the App Store link.
+The App Store button links to https://apps.apple.com/app/id6764603778 (storefront-neutral, redirects to the visitor's country).
