@@ -39,7 +39,9 @@ a.btn{display:block;padding:14px 18px;margin:10px 0;border-radius:12px;backgroun
 <a class="btn" id="ios" href="https://apps.apple.com/app/id6764603778">Download on the App Store</a>
 </main>
 <script>
-var PLAY='https://play.google.com/store/apps/details?id=com.celix.shiftmate&referrer=utm_source%3Dshare%26utm_medium%3Dapp';
+var m=(new URLSearchParams(location.search).get('m')||'app').toLowerCase();
+if(!/^[a-z0-9_]{1,30}$/.test(m))m='app';
+var PLAY='https://play.google.com/store/apps/details?id=com.celix.shiftmate&referrer=utm_source%3Dshare%26utm_medium%3D'+m;
 var IOS='https://apps.apple.com/app/id6764603778';
 var L={en:['Free to download','Get it on Google Play','Download on the App Store'],
 tr:['Ücretsiz indir',"Google Play'den indir","App Store'dan indir"],
@@ -58,6 +60,7 @@ var lang=(navigator.language||'en').toLowerCase();
 var t=L[lang]||(lang.indexOf('zh-tw')==0||lang.indexOf('zh-hk')==0?['免費下載','在 Google Play 下載','在 App Store 下載']:L[lang.split('-')[0]])||L.en;
 document.documentElement.lang=lang.split('-')[0];
 document.getElementById('free').textContent=t[0];
+document.getElementById('play').href=PLAY;
 document.getElementById('play').textContent=t[1];
 document.getElementById('ios').textContent=t[2];
 var ua=navigator.userAgent||'';
