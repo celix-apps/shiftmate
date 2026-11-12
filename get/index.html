@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ShiftMate – Download</title>
+<meta name="robots" content="noindex">
+<meta property="og:title" content="ShiftMate">
+<meta property="og:image" content="https://celix-apps.github.io/shiftmate/img/icon.png">
+<link rel="icon" href="../img/icon-192.png">
+<link rel="apple-touch-icon" href="../img/icon-192.png">
+<style>
+:root{--bg:#ffffff;--text:#0f172a;--muted:#55607a;--brand:#0A6CFF;--brand-ink:#fff;--line:#e6eaf2}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0e14;--text:#eef2f8;--muted:#a6afc2;--brand:#3d8bff;--line:#232a37}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;text-align:center}
+main{padding:32px 16px;max-width:360px;width:100%}
+img{width:96px;height:96px;border-radius:22px}
+h1{font-size:26px;margin:16px 0 4px}
+p{color:var(--muted);margin:0 0 28px}
+a.btn{display:block;padding:14px 18px;margin:10px 0;border-radius:12px;background:var(--brand);color:var(--brand-ink);font-weight:600;text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+<img src="../img/icon-192.png" alt="ShiftMate">
+<h1>ShiftMate</h1>
+<p id="free">Free to download</p>
+<a class="btn" id="play" href="https://play.google.com/store/apps/details?id=com.celix.shiftmate&amp;referrer=utm_source%3Dshare%26utm_medium%3Dapp">Get it on Google Play</a>
+<a class="btn" id="ios" href="https://apps.apple.com/app/id6764603778">Download on the App Store</a>
+</main>
+<script>
+var PLAY='https://play.google.com/store/apps/details?id=com.celix.shiftmate&referrer=utm_source%3Dshare%26utm_medium%3Dapp';
+var IOS='https://apps.apple.com/app/id6764603778';
+var L={en:['Free to download','Get it on Google Play','Download on the App Store'],
+tr:['Ücretsiz indir',"Google Play'den indir","App Store'dan indir"],
+de:['Kostenlos laden','Jetzt bei Google Play','Laden im App Store'],
+es:['Descarga gratuita','Disponible en Google Play','Consíguelo en el App Store'],
+fr:['Téléchargement gratuit','Disponible sur Google Play',"Télécharger dans l'App Store"],
+it:['Download gratuito','Disponibile su Google Play','Scarica su App Store'],
+ja:['無料ダウンロード','Google Play で手に入れよう','App Store からダウンロード'],
+ko:['무료 다운로드','Google Play에서 받기','App Store에서 다운로드'],
+nl:['Gratis downloaden','Ontdek het op Google Play','Download in de App Store'],
+pl:['Pobierz za darmo','Pobierz z Google Play','Pobierz w App Store'],
+pt:['Download gratuito','Disponível no Google Play','Baixar na App Store'],
+ru:['Бесплатно','Доступно в Google Play','Загрузите в App Store'],
+zh:['免费下载','在 Google Play 上获取','在 App Store 下载']};
+var lang=(navigator.language||'en').toLowerCase();
+var t=L[lang]||(lang.indexOf('zh-tw')==0||lang.indexOf('zh-hk')==0?['免費下載','在 Google Play 下載','在 App Store 下載']:L[lang.split('-')[0]])||L.en;
+document.documentElement.lang=lang.split('-')[0];
+document.getElementById('free').textContent=t[0];
+document.getElementById('play').textContent=t[1];
+document.getElementById('ios').textContent=t[2];
+var ua=navigator.userAgent||'';
+var iPadOS=/Macintosh/.test(ua)&&navigator.maxTouchPoints>1;
+if(/Android/i.test(ua)){location.replace(PLAY)}
+else if(/iPhone|iPad|iPod/i.test(ua)||iPadOS){location.replace(IOS)}
+</script>
+</body>
+</html>
