@@ -135,6 +135,7 @@ footer a:hover{color:var(--text)}
       <a href="#features" id="navFeatures">Features</a>
       <a href="#screenshots" id="navShots">Screenshots</a>
       <a href="#privacy" id="navPrivacy">Privacy</a>
+      <a href="support/" id="navSupport">Support</a>
     </nav>
     <div class="spacer"></div>
     <select id="lang" aria-label="Language"></select>
@@ -210,11 +211,11 @@ footer a:hover{color:var(--text)}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Celix Apps</span>
+    <span>© 2026 Resul Çelik (Celix Apps)</span>
     <a id="privacyA" href="https://celix-apps.github.io/shiftmate-privacy-android/">Privacy policy</a>
     <a id="privacyI" href="https://celix-apps.github.io/shiftmate-privacy/">Privacy policy</a>
     <a id="terms" href="https://celix-apps.github.io/shiftmate-privacy-android/terms">Terms of use</a>
-    <a id="support" href="mailto:support.shiftmate@icloud.com">Support</a>
+    <a id="support" href="support/">Support</a>
   </div>
 </footer>
 
@@ -258,7 +259,7 @@ function render(l){
   const set=(id,v)=>{const e=$(id);if(e)e.textContent=v};
   set('name',d.name);set('short',d.short);set('intro',d.intro);set('free',d.free);
   set('playText',d.play);set('playText2',d.play);set('iosText',d.ios);set('iosText2',d.ios);
-  set('navFeatures',d.navFeatures);set('navShots',d.navShots);set('navPrivacy',d.navPrivacy);
+  set('navFeatures',d.navFeatures);set('navShots',d.navShots);set('navPrivacy',d.navPrivacy);set('navSupport',d.support);
   set('kFeatures',d.navFeatures);set('kShots',d.navShots);set('kPrivacy',d.navPrivacy);
   set('tFeatures',d.tFeatures);set('tShots',d.tShots);set('tPrivacy',d.tPrivacy);
   set('finalName',d.name);set('finalShort',d.short);set('pro',d.pro);
