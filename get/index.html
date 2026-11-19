@@ -39,9 +39,18 @@ a.btn{display:block;padding:14px 18px;margin:10px 0;border-radius:12px;backgroun
 <a class="btn" id="ios" href="https://apps.apple.com/app/id6764603778">Download on the App Store</a>
 </main>
 <script>
-var m=(new URLSearchParams(location.search).get('m')||'app').toLowerCase();
-if(!/^[a-z0-9_]{1,30}$/.test(m))m='app';
-var PLAY='https://play.google.com/store/apps/details?id=com.celix.shiftmate&referrer=utm_source%3Dshare%26utm_medium%3D'+m;
+var q=new URLSearchParams(location.search);
+// ?l=<meslek> opens the matching custom Play listing (Play Console: URL-targeted custom listings).
+var JOBS={saglik:'healthcare',healthcare:'healthcare',
+fabrika:'manufacturing',factory:'manufacturing',manufacturing:'manufacturing',
+guvenlik:'security',security:'security',
+havacilik:'aviation',ulasim:'aviation',aviation:'aviation',transport:'aviation'};
+var job=JOBS[(q.get('l')||'').toLowerCase()];
+var m=(q.get('m')||(job?'link':'app')).toLowerCase();
+if(!/^[a-z0-9_]{1,30}$/.test(m))m=job?'link':'app';
+var PLAY=job
+?'https://play.google.com/store/apps/details?id=com.celix.shiftmate&listing='+job+'&referrer=utm_source%3Dwebsite%26utm_medium%3D'+m+'%26utm_campaign%3Djob_'+job
+:'https://play.google.com/store/apps/details?id=com.celix.shiftmate&referrer=utm_source%3Dshare%26utm_medium%3D'+m;
 var IOS='https://apps.apple.com/app/id6764603778';
 var L={en:['Free to download','Get it on Google Play','Download on the App Store'],
 tr:['Ücretsiz indir',"Google Play'den indir","App Store'dan indir"],
