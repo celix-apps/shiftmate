@@ -64,10 +64,14 @@ nl:['Gratis downloaden','Ontdek het op Google Play','Download in de App Store'],
 pl:['Pobierz za darmo','Pobierz z Google Play','Pobierz w App Store'],
 pt:['Download gratuito','Disponível no Google Play','Baixar na App Store'],
 ru:['Бесплатно','Доступно в Google Play','Загрузите в App Store'],
-zh:['免费下载','在 Google Play 上获取','在 App Store 下载']};
+zh:['免费下载','在 Google Play 上获取','在 App Store 下载'],
+id:['Unduh gratis','Dapatkan di Google Play','Unduh di App Store'],
+vi:['Tải miễn phí','Tải trên Google Play','Tải trên App Store'],
+ar:['تنزيل مجاني','احصل عليه من Google Play','حمّله من App Store']};
 var lang=(navigator.language||'en').toLowerCase();
-var t=L[lang]||(lang.indexOf('zh-tw')==0||lang.indexOf('zh-hk')==0?['免費下載','在 Google Play 下載','在 App Store 下載']:L[lang.split('-')[0]])||L.en;
+var t=L[lang]||(/^zh-(hant|tw|hk|mo)/.test(lang)?['免費下載','在 Google Play 下載','在 App Store 下載']:L[lang.split('-')[0]])||L.en;
 document.documentElement.lang=lang.split('-')[0];
+if(lang.split('-')[0]=='ar')document.documentElement.dir='rtl';
 document.getElementById('free').textContent=t[0];
 document.getElementById('play').href=PLAY;
 document.getElementById('play').textContent=t[1];
