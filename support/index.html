@@ -26,10 +26,12 @@ a{color:var(--brand-text)}
 .top .wrap{display:flex;align-items:center;gap:20px;height:64px;max-width:1120px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;text-decoration:none;color:var(--text);letter-spacing:-.01em}
 .brand img{width:32px;height:32px;border-radius:8px}
-nav{display:flex;gap:22px;margin-left:12px}
+nav{display:flex;gap:22px;margin-inline-start:12px}
 nav a{font-size:14px;color:var(--muted);text-decoration:none;font-weight:500}
 nav a:hover,nav a.on{color:var(--text)}
 .spacer{flex:1}
+select{font:inherit;font-size:14px;padding:7px 30px 7px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a93a8' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;color:var(--text);appearance:none;-webkit-appearance:none;max-width:44vw}
+[dir=rtl] select{padding:7px 12px 7px 30px;background-position:left 10px center}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
 .btn.primary{background:var(--brand);color:var(--brand-ink)}
 .btn.ghost{border:1px solid var(--line);color:var(--text);background:var(--card)}
@@ -59,16 +61,16 @@ h2 .icon{width:34px;height:34px;border-radius:10px}
 h2 .icon svg{width:18px;height:18px}
 .group{margin:0 0 44px}
 details{border:1px solid var(--line);border-radius:14px;background:var(--card);margin:0 0 10px}
-summary{cursor:pointer;list-style:none;padding:16px 48px 16px 18px;font-weight:600;position:relative}
+summary{cursor:pointer;list-style:none;padding-block:16px;padding-inline:18px 48px;font-weight:600;position:relative}
 summary::-webkit-details-marker{display:none}
-summary:after{content:"";position:absolute;right:20px;top:50%;width:9px;height:9px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:translateY(-70%) rotate(45deg);transition:transform .15s}
+summary:after{content:"";position:absolute;inset-inline-end:20px;top:50%;width:9px;height:9px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:translateY(-70%) rotate(45deg);transition:transform .15s}
 details[open] summary:after{transform:translateY(-30%) rotate(-135deg)}
 .ans{padding:0 18px 16px;color:var(--muted);font-size:15px}
 .ans p{margin:0 0 10px}
-.ans ol,.ans ul{margin:0 0 10px;padding-left:20px}
+.ans ol,.ans ul{margin:0 0 10px;padding-inline-start:20px}
 .ans li{margin:4px 0}
 .path{font-weight:600;color:var(--text)}
-.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:6px;background:var(--bg-soft);border:1px solid var(--line);color:var(--muted);margin-left:6px;vertical-align:2px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:6px;background:var(--bg-soft);border:1px solid var(--line);color:var(--muted);margin-inline-start:6px;vertical-align:2px}
 /* still need help */
 .ios,.and{display:inline}
 div.ios,div.and,p.ios,p.and,ol.ios,ol.and,li.ios,li.and,details.ios,details.and{display:block}
@@ -79,7 +81,7 @@ body.android .ios,body:not(.android) .and{display:none!important}
 .still{margin:12px 0 64px;padding:28px;border-radius:20px;background:var(--bg-soft);border:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
 .still h3{margin:0 0 6px;font-size:20px}
 .still p{margin:0;color:var(--muted);font-size:15px}
-.still ul{margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:14px}
+.still ul{margin:10px 0 0;padding-inline-start:20px;color:var(--muted);font-size:14px}
 footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--faint);font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;max-width:1120px}
 footer a{color:var(--muted);text-decoration:none}
@@ -104,26 +106,26 @@ footer a:hover{color:var(--text)}
   <div class="wrap">
     <a class="brand" href="../"><img src="../img/icon-192.png" alt="" width="32" height="32">ShiftMate</a>
     <nav>
-      <a href="../#features">Features</a>
-      <a href="../#screenshots">Screenshots</a>
-      <a class="ios" href="https://celix-apps.github.io/shiftmate-privacy/">Privacy</a><a class="and" href="https://celix-apps.github.io/shiftmate-privacy-android/">Privacy</a>
-      <a href="./" class="on">Support</a>
+      <a href="../#features" data-i="k001">Features</a>
+      <a href="../#screenshots" data-i="k002">Screenshots</a>
+      <a class="ios" href="https://celix-apps.github.io/shiftmate-privacy/" data-i="k003">Privacy</a><a class="and" href="https://celix-apps.github.io/shiftmate-privacy-android/" data-i="k004">Privacy</a>
+      <a href="./" class="on" data-i="k005">Support</a>
     </nav>
     <div class="spacer"></div>
+    <select id="lang" aria-label="Language"></select>
     <a class="btn dark sm ios" href="https://apps.apple.com/app/id6764603778">App Store</a><a class="btn primary sm and" href="https://play.google.com/store/apps/details?id=com.celix.shiftmate&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dsupport">Google Play</a>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <div class="kicker">Support</div>
-    <h1>How can we help?</h1>
-    <p class="lead">Answers to the most common questions about ShiftMate. Can't find what you need? Email us.</p>
-    <div class="switch" role="group" aria-label="Platform"><button type="button" data-p="ios">iPhone &amp; iPad</button><button type="button" data-p="android">Android</button></div>
+    <div class="kicker" data-i="k006">Support</div>
+    <h1 data-i="k007">How can we help?</h1>
+    <p class="lead" data-i="k008">Answers to the most common questions about ShiftMate. Can't find what you need? Email us.</p>
+    <div class="switch" role="group" aria-label="Platform"><button type="button" data-p="ios" data-i="k_ios">iPhone &amp; iPad</button><button type="button" data-p="android">Android</button></div>
     <div class="contact">
       <a class="btn primary" href="mailto:support.shiftmate@icloud.com?subject=ShiftMate%20support">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-        Email support</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span data-i="k009">Email support</span></a>
       <span class="meta">support.shiftmate@icloud.com</span>
     </div>
   </div>
@@ -131,138 +133,138 @@ footer a:hover{color:var(--text)}
 
 <div class="wrap">
   <div class="topics">
-    <a class="topic" href="#alarms"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M22 6l-3-3"/></svg></div><div><b>Alarms &amp; notifications</b><span>Alarm didn't ring, silent mode</span></div></a>
-    <a class="topic" href="#backup"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12 3.5 3.5 0 0 0 6 19z"/></svg></div><div><b>Backup &amp; sync</b><span>New phone, restore, sync</span></div></a>
-    <a class="topic" href="#pro"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div><div><b>ShiftMate Pro</b><span>Free trial, restore, cancel, refund</span></div></a>
-    <a class="topic" href="#widgets"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/></svg></div><div><b>Widgets &amp; calendar</b><span>Home Screen, Apple Calendar</span></div></a>
-    <a class="topic" href="#health"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5a5.5 5.5 0 0 0-10 3.5c0 2.3 1.5 4 3 5.5l7 7 7-7z"/></svg></div><div><b>Health &amp; sleep</b><span>Sleep data, fatigue score</span></div></a>
-    <a class="topic" href="#data"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><b>Privacy &amp; your data</b><span>Where data lives, deleting it</span></div></a>
+    <a class="topic" href="#alarms"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M22 6l-3-3"/></svg></div><div><b data-i="k010">Alarms &amp; notifications</b><span data-i="k011">Alarm didn't ring, silent mode</span></div></a>
+    <a class="topic" href="#backup"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12 3.5 3.5 0 0 0 6 19z"/></svg></div><div><b data-i="k012">Backup &amp; sync</b><span data-i="k013">New phone, restore, sync</span></div></a>
+    <a class="topic" href="#pro"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div><div><b data-i="k014">ShiftMate Pro</b><span data-i="k015">Free trial, restore, cancel, refund</span></div></a>
+    <a class="topic" href="#widgets"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/></svg></div><div><b data-i="k016">Widgets &amp; calendar</b><span data-i="k017"><span class="ios">Home Screen, Apple Calendar</span><span class="and">Home screen, phone calendar</span></span></div></a>
+    <a class="topic" href="#health"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5a5.5 5.5 0 0 0-10 3.5c0 2.3 1.5 4 3 5.5l7 7 7-7z"/></svg></div><div><b data-i="k018">Health &amp; sleep</b><span data-i="k019">Sleep data, fatigue score</span></div></a>
+    <a class="topic" href="#data"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><b data-i="k020">Privacy &amp; your data</b><span data-i="k021">Where data lives, deleting it</span></div></a>
   </div>
 
   <section class="faq">
     <div class="group" id="alarms">
-      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M22 6l-3-3"/></svg></span>Alarms &amp; notifications</h2>
+      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M22 6l-3-3"/></svg></span><span data-i="k022">Alarms &amp; notifications</span></h2>
       <details open>
-        <summary>My alarm didn't ring. What should I check?</summary>
+        <summary data-i="k023">My alarm didn't ring. What should I check?</summary>
         <div class="ans">
           <ol class="ios">
-            <li>Notifications are allowed: <span class="path">iPhone Settings › ShiftMate › Notifications</span>.</li>
-            <li>On iOS 26 or later, turn on <span class="path">ShiftMate › Settings › Notifications › System Alarms</span>. With System Alarms on, alarms ring even when the app is closed, the phone is on silent or a Focus mode is active.</li>
-            <li>Without System Alarms, alarms arrive as notifications: Silent mode, Do Not Disturb and Focus modes can mute them.</li>
-            <li>Check the alarm is on and the date and time are correct in the Alarm tab or in the shift's alarm.</li>
+            <li data-i="k024">Notifications are allowed: <span class="path">iPhone Settings › ShiftMate › Notifications</span>.</li>
+            <li data-i="k025">On iOS 26 or later, turn on <span class="path">ShiftMate › Settings › Notifications › System Alarms</span>. With System Alarms on, alarms ring even when the app is closed, the phone is on silent or a Focus mode is active.</li>
+            <li data-i="k026">Without System Alarms, alarms arrive as notifications: Silent mode, Do Not Disturb and Focus modes can mute them.</li>
+            <li data-i="k027">Check the alarm is on and the date and time are correct in the Alarm tab or in the shift's alarm.</li>
           </ol>
           <ol class="and">
-            <li>ShiftMate needs three permissions: <b>notifications</b>, <b>exact alarms</b> and <b>full-screen notifications</b>. If one is off, a warning appears at the top of the Alarms tab; tap its button to turn it on.</li>
-            <li><span class="path">Settings › Privacy &amp; GDPR › Manage Permissions</span> opens the app's system settings.</li>
-            <li>On some phones you also need to turn off battery optimization for ShiftMate.</li>
-            <li>The alarm sound uses the alarm volume and plays in Do Not Disturb. Alarms are rescheduled automatically after a restart.</li>
+            <li data-i="k028">ShiftMate needs three permissions: <b>notifications</b>, <b>exact alarms</b> and <b>full-screen notifications</b>. If one is off, a warning appears at the top of the Alarms tab; tap its button to turn it on.</li>
+            <li data-i="k029"><span class="path">Settings › Privacy &amp; GDPR › Manage Permissions</span> opens the app's system settings.</li>
+            <li data-i="k030">On some phones you also need to turn off battery optimization for ShiftMate.</li>
+            <li data-i="k031">The alarm sound uses the alarm volume and plays in Do Not Disturb. Alarms are rescheduled automatically after a restart.</li>
           </ol>
         </div>
       </details>
       <details>
-        <summary>How do I set an alarm for a shift?</summary>
-        <div class="ans"><p>While adding or editing a shift, tap <span class="path ios">Add Alarm</span><span class="path and">Alarms › Add Alarm</span>. An alarm set before the shift moves with it. For alarms not tied to a shift, use the <span class="ios">Alarm</span><span class="and">Alarms</span> tab and the + button.</p><p>The free version includes one alarm; more alarms per shift are part of ShiftMate Pro.</p></div>
+        <summary data-i="k032">How do I set an alarm for a shift?</summary>
+        <div class="ans"><p data-i="k033">While adding or editing a shift, tap <span class="path ios">Add Alarm</span><span class="path and">Alarms › Add Alarm</span>. An alarm set before the shift moves with it. For alarms not tied to a shift, use the <span class="ios">Alarm</span><span class="and">Alarms</span> tab and the + button.</p><p data-i="k034">The free version includes one alarm; more alarms per shift are part of ShiftMate Pro.</p></div>
       </details>
     </div>
 
     <div class="group" id="backup">
-      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12 3.5 3.5 0 0 0 6 19z"/></svg></span>Backup &amp; sync</h2>
+      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12 3.5 3.5 0 0 0 6 19z"/></svg></span><span data-i="k035">Backup &amp; sync</span></h2>
       <details>
-        <summary>I'm switching phones. How do I move my shifts?</summary>
+        <summary data-i="k036">I'm switching phones. How do I move my shifts?</summary>
         <div class="ans">
-          <p class="and">The easiest way is <b>Google Drive</b>: on the new phone, open <span class="path">Settings › Backup &amp; Restore</span>, connect the same Google account, pick a backup under <b>View Backups</b> and tap <b>Restore</b>. No Drive? Use a backup file:</p>
+          <p class="and" data-i="k037">The easiest way is <b>Google Drive</b>: on the new phone, open <span class="path">Settings › Backup &amp; Restore</span>, connect the same Google account, pick a backup under <b>View Backups</b> and tap <b>Restore</b>. No Drive? Use a backup file:</p>
           <ol>
-            <li>On the old phone: <span class="path">Settings › Backup &amp; Restore › Create Backup File</span>, then save the <code>.shiftmatebackup</code> file somewhere the new phone can reach<span class="ios"> (Files, iCloud Drive)</span>, or send it to yourself.</li>
-            <li>On the new phone: <span class="path">Settings › Backup &amp; Restore › Restore from Backup File</span> and pick that file.</li>
-            <li>Choose <b>Merge</b> to add it to what's already there, or <b>Replace All</b> to start from the backup (this can't be undone).</li>
+            <li data-i="k038">On the old phone: <span class="path">Settings › Backup &amp; Restore › Create Backup File</span>, then save the <code>.shiftmatebackup</code> file somewhere the new phone can reach<span class="ios"> (Files, iCloud Drive)</span>, or send it to yourself.</li>
+            <li data-i="k039">On the new phone: <span class="path">Settings › Backup &amp; Restore › Restore from Backup File</span> and pick that file.</li>
+            <li data-i="k040">Choose <b>Merge</b> to add it to what's already there, or <b>Replace All</b> to start from the backup (this can't be undone).</li>
           </ol>
-          <p>A backup includes shifts, leave, alarms, patterns, earnings settings and preferences. <span class="ios">Apple Health</span><span class="and">Health Connect</span> data is not included.</p>
+          <p data-i="k041">A backup includes shifts, leave, alarms, patterns, earnings settings and preferences. <span class="ios">Apple Health</span><span class="and">Health Connect</span> data is not included.</p>
         </div>
       </details>
       <details class="and">
-        <summary>How does Google Drive backup work?</summary>
-        <div class="ans"><p>In <span class="path">Settings › Backup &amp; Restore</span>, tap <b>Connect Google Drive</b>. ShiftMate then backs up automatically once a day when you're online and keeps the last 5 backups. <b>Backup Now</b> backs up right away. The <b>Automatic Backup</b> switch on the main Settings screen turns daily backups on or off.</p></div>
+        <summary data-i="k042">How does Google Drive backup work?</summary>
+        <div class="ans"><p data-i="k043">In <span class="path">Settings › Backup &amp; Restore</span>, tap <b>Connect Google Drive</b>. ShiftMate then backs up automatically once a day when you're online and keeps the last 5 backups. <b>Backup Now</b> backs up right away. The <b>Automatic Backup</b> switch on the main Settings screen turns daily backups on or off.</p></div>
       </details>
       <details class="ios">
-        <summary>How does iCloud Sync work? <span class="tag">Pro</span></summary>
-        <div class="ans"><p>Turn it on in <span class="path">Settings › iCloud Backup › iCloud Sync</span>. Your shifts sync to every device signed in to the same Apple Account, through your own private iCloud storage. Changes take effect on the next app launch.</p><p>If you sign out of iCloud, the synced copy on that device is removed (it stays in iCloud). Make a backup file before signing out.</p></div>
+        <summary data-i="k044">How does iCloud Sync work? <span class="tag">Pro</span></summary>
+        <div class="ans"><p data-i="k045">Turn it on in <span class="path">Settings › iCloud Backup › iCloud Sync</span>. Your shifts sync to every device signed in to the same Apple Account, through your own private iCloud storage. Changes take effect on the next app launch.</p><p data-i="k046">If you sign out of iCloud, the synced copy on that device is removed (it stays in iCloud). Make a backup file before signing out.</p></div>
       </details>
     </div>
 
     <div class="group" id="pro">
-      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span>ShiftMate Pro</h2>
+      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span><span data-i="k047">ShiftMate Pro</span></h2>
       <details>
-        <summary>Is there a free trial?</summary>
-        <div class="ans"><p>Yes. Both the monthly and the yearly plan start with a <b class="ios">2-week free trial</b><b class="and">15-day free trial</b>. The trial is for new subscribers and can be used once per <span class="ios">Apple Account</span><span class="and">Google account</span>.</p><p><span class="ios">Cancel at least 24 hours before the trial ends and you won't be charged.</span><span class="and">Cancel before the trial ends and you won't be charged.</span> If you keep it, the subscription starts automatically when the trial ends.</p></div>
+        <summary data-i="k048">Is there a free trial?</summary>
+        <div class="ans"><p data-i="k049">Yes. Both the monthly and the yearly plan start with a <b class="ios">2-week free trial</b><b class="and">15-day free trial</b>. The trial is for new subscribers and can be used once per <span class="ios">Apple Account</span><span class="and">Google account</span>.</p><p data-i="k050"><span class="ios">Cancel at least 24 hours before the trial ends and you won't be charged.</span><span class="and">Cancel before the trial ends and you won't be charged.</span> If you keep it, the subscription starts automatically when the trial ends.</p></div>
       </details>
       <details>
-        <summary>I paid but Pro isn't active.</summary>
-        <div class="ans"><p>Go to <span class="path">Settings › Subscription › Restore Purchases</span>. Make sure you're signed in with the same <span class="ios">Apple Account</span><span class="and">Google account</span> you used to subscribe.</p></div>
+        <summary data-i="k051">I paid but Pro isn't active.</summary>
+        <div class="ans"><p data-i="k052">Go to <span class="path">Settings › Subscription › Restore Purchases</span>. Make sure you're signed in with the same <span class="ios">Apple Account</span><span class="and">Google account</span> you used to subscribe.</p></div>
       </details>
       <details>
-        <summary>How do I cancel?</summary>
-        <div class="ans"><p>Subscriptions are managed by <span class="ios">Apple</span><span class="and">Google Play</span>. Open <span class="path">Settings › Subscription › Manage Subscription</span> in ShiftMate, or <span class="path ios">iPhone Settings › [your name] › Subscriptions</span><span class="path and">Google Play › Payments &amp; subscriptions</span>. Deleting the app does not cancel a subscription. If Pro ends, your settings are kept and come back when you subscribe again.</p></div>
+        <summary data-i="k053">How do I cancel?</summary>
+        <div class="ans"><p data-i="k054">Subscriptions are managed by <span class="ios">Apple</span><span class="and">Google Play</span>. Open <span class="path">Settings › Subscription › Manage Subscription</span> in ShiftMate, or <span class="path ios">iPhone Settings › [your name] › Subscriptions</span><span class="path and">Google Play › Payments &amp; subscriptions</span>. Deleting the app does not cancel a subscription. If Pro ends, your settings are kept and come back when you subscribe again.</p></div>
       </details>
       <details>
-        <summary>How do I request a refund?</summary>
-        <div class="ans"><p class="ios">Refunds are handled by Apple, not by us. Request one at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p><p class="and">Refunds are handled by Google Play. Follow Google's steps at <a href="https://support.google.com/googleplay/answer/2479637">support.google.com/googleplay</a>.</p></div>
+        <summary data-i="k055">How do I request a refund?</summary>
+        <div class="ans"><p class="ios" data-i="k056">Refunds are handled by Apple, not by us. Request one at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p><p class="and" data-i="k057">Refunds are handled by Google Play. Follow Google's steps at <a href="https://support.google.com/googleplay/answer/2479637">support.google.com/googleplay</a>.</p></div>
       </details>
     </div>
 
     <div class="group" id="widgets">
-      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/></svg></span>Widgets &amp; calendar</h2>
+      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/></svg></span><span data-i="k058">Widgets &amp; calendar</span></h2>
       <details>
-        <summary>How do I add a widget?</summary>
-        <div class="ans"><p class="ios">Touch and hold an empty area of the Home Screen, tap <span class="path">Edit › Add Widget</span> (on iOS 17, the + button), search for ShiftMate and choose a size. For the Lock Screen: touch and hold the Lock Screen › Customize › Lock Screen › tap the widget area › ShiftMate.</p><p class="and">Press and hold an empty spot on your home screen, tap <b>Widgets</b> and find ShiftMate: Today's Shift, Weekly View, Weekly Overview, Weekly Earnings and Leave Balance. If a widget shows old information, open the app once; on some phones battery optimization can delay updates.</p></div>
+        <summary data-i="k059">How do I add a widget?</summary>
+        <div class="ans"><p class="ios" data-i="k060">Touch and hold an empty area of the Home Screen, tap <span class="path">Edit › Add Widget</span> (on iOS 17, the + button), search for ShiftMate and choose a size. For the Lock Screen: touch and hold the Lock Screen › Customize › Lock Screen › tap the widget area › ShiftMate.</p><p class="and" data-i="k061">Press and hold an empty spot on your home screen, tap <b>Widgets</b> and find ShiftMate: Today's Shift, Weekly View, Weekly Overview, Weekly Earnings and Leave Balance. If a widget shows old information, open the app once; on some phones battery optimization can delay updates.</p></div>
       </details>
       <details>
-        <summary>Can my shifts appear in my phone's calendar? <span class="tag">Pro</span></summary>
-        <div class="ans"><p>Yes. In <span class="path">Settings › Calendar Sharing</span>, turn on <b>Add Shifts to Calendar</b>, allow calendar access and choose a calendar<span class="and"> (pick one from your Google account to see shifts on your other devices too)</span>. New and changed shifts appear there automatically. You can also share a month as a PDF or image.</p></div>
+        <summary data-i="k062">Can my shifts appear in my phone's calendar? <span class="tag">Pro</span></summary>
+        <div class="ans"><p data-i="k063">Yes. In <span class="path">Settings › Calendar Sharing</span>, turn on <b>Add Shifts to Calendar</b>, allow calendar access and choose a calendar<span class="and"> (pick one from your Google account to see shifts on your other devices too)</span>. New and changed shifts appear there automatically. You can also share a month as a PDF or image.</p></div>
       </details>
     </div>
 
     <div class="group" id="health">
-      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5a5.5 5.5 0 0 0-10 3.5c0 2.3 1.5 4 3 5.5l7 7 7-7z"/></svg></span>Health &amp; sleep</h2>
+      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5a5.5 5.5 0 0 0-10 3.5c0 2.3 1.5 4 3 5.5l7 7 7-7z"/></svg></span><span data-i="k064">Health &amp; sleep</span></h2>
       <details>
-        <summary>What does ShiftMate read from <span class="ios">Apple Health</span><span class="and">Health Connect</span>?</summary>
-        <div class="ans"><p>Only sleep data, and only if you allow it. It's used on your device to calculate the fatigue score and sleep plan, and never leaves your device.</p><p class="ios">You can change access any time in <span class="path">iPhone Settings › Health › Data Access &amp; Devices › ShiftMate</span>.</p><p class="and">Connect it on <span class="path">Tracker › Health › Allow Health Access</span>. Your watch or sleep app must write sleep data to Health Connect.</p></div>
+        <summary data-i="k065">What does ShiftMate read from <span class="ios">Apple Health</span><span class="and">Health Connect</span>?</summary>
+        <div class="ans"><p data-i="k066">Only sleep data, and only if you allow it. It's used on your device to calculate the fatigue score and sleep plan, and never leaves your device.</p><p class="ios" data-i="k067">You can change access any time in <span class="path">iPhone Settings › Health › Data Access &amp; Devices › ShiftMate</span>.</p><p class="and" data-i="k068">Connect it on <span class="path">Tracker › Health › Allow Health Access</span>. Your watch or sleep app must write sleep data to Health Connect.</p></div>
       </details>
     </div>
 
     <div class="group" id="data">
-      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Privacy &amp; your data</h2>
+      <h2><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span data-i="k069">Privacy &amp; your data</span></h2>
       <details>
-        <summary>Where is my data stored?</summary>
-        <div class="ans"><p>On your device<span class="ios">, and in your own private iCloud storage if you turn on iCloud Sync</span><span class="and">, and in your own Google Drive if you turn on Drive backup</span>. We don't run servers that store your shifts. Details are in the <a class="ios" href="https://celix-apps.github.io/shiftmate-privacy/">privacy policy</a><a class="and" href="https://celix-apps.github.io/shiftmate-privacy-android/">privacy policy</a>.</p></div>
+        <summary data-i="k070">Where is my data stored?</summary>
+        <div class="ans"><p data-i="k071">On your device<span class="ios">, and in your own private iCloud storage if you turn on iCloud Sync</span><span class="and">, and in your own Google Drive if you turn on Drive backup</span>. We don't run servers that store your shifts. Details are in the <a class="ios" href="https://celix-apps.github.io/shiftmate-privacy/">privacy policy</a><a class="and" href="https://celix-apps.github.io/shiftmate-privacy-android/">privacy policy</a>.</p></div>
       </details>
       <details>
-        <summary>How do I delete all my data?</summary>
-        <div class="ans"><p>Go to <span class="path">Settings › Privacy &amp; GDPR › Delete My Account</span>. This permanently deletes your shifts, alarms, settings and personal data and can't be undone, so make a backup first. An active subscription must be cancelled separately (see above)<span class="and">; Google Drive backups are not deleted</span>.</p></div>
+        <summary data-i="k072">How do I delete all my data?</summary>
+        <div class="ans"><p data-i="k073">Go to <span class="path">Settings › Privacy &amp; GDPR › Delete All My Data</span>. This permanently deletes your shifts, alarms, settings and personal data and can't be undone, so make a backup first. An active subscription must be cancelled separately (see above)<span class="and">; Google Drive backups are not deleted</span>.</p></div>
       </details>
     </div>
   </section>
 
   <div class="still">
     <div>
-      <h3>Still need help?</h3>
-      <p>Send us an email. These details help us answer faster:</p>
+      <h3 data-i="k074">Still need help?</h3>
+      <p data-i="k075">Send us an email. These details help us answer faster:</p>
       <ul>
-        <li><span class="ios">iPhone or iPad model and iOS version</span><span class="and">Phone model and Android version</span></li>
-        <li>ShiftMate version (<span class="ios">Settings › App</span><span class="and">Settings › Application</span>)</li>
-        <li>What you did, what you expected, and a screenshot if you can</li>
+        <li data-i="k076"><span class="ios">iPhone or iPad model and iOS version</span><span class="and">Phone model and Android version</span></li>
+        <li data-i="k077">ShiftMate version (<span class="ios">Settings › App</span><span class="and">Settings › Application</span>)</li>
+        <li data-i="k078">What you did, what you expected, and a screenshot if you can</li>
       </ul>
     </div>
-    <a class="btn primary" href="mailto:support.shiftmate@icloud.com?subject=ShiftMate%20support">Email support</a>
+    <a class="btn primary" href="mailto:support.shiftmate@icloud.com?subject=ShiftMate%20support"><span data-i="k079">Email support</span></a>
   </div>
 </div>
 
 <footer>
   <div class="wrap">
     <span>© 2026 Resul Çelik (Celix Apps)</span>
-    <a href="../">Home</a>
-    <a class="ios" href="https://celix-apps.github.io/shiftmate-privacy/">Privacy policy</a><a class="and" href="https://celix-apps.github.io/shiftmate-privacy-android/">Privacy policy</a>
-    <a class="ios" href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of use</a><a class="and" href="https://celix-apps.github.io/shiftmate-privacy-android/terms">Terms of use</a>
-    <a href="mailto:support.shiftmate@icloud.com">support.shiftmate@icloud.com</a>
+    <a href="../" data-i="k080">Home</a>
+    <a class="ios" href="https://celix-apps.github.io/shiftmate-privacy/" data-i="k081">Privacy policy</a><a class="and" href="https://celix-apps.github.io/shiftmate-privacy-android/" data-i="k082">Privacy policy</a>
+    <a class="ios" href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" data-i="k083">Terms of use</a><a class="and" href="https://celix-apps.github.io/shiftmate-privacy-android/terms" data-i="k084">Terms of use</a>
+    <a href="mailto:support.shiftmate@icloud.com" data-i="k085">support.shiftmate@icloud.com</a>
   </div>
 </footer>
 
@@ -279,6 +281,46 @@ footer a:hover{color:var(--text)}
   }
   document.querySelectorAll('.switch button').forEach(function (x) { x.addEventListener('click', function () { set(x.dataset.p, true); }); });
   set(p === 'android' ? 'android' : 'ios', false);
+})();
+</script>
+<script>
+(function () {
+  var NAMES={en:'English',tr:'Türkçe',de:'Deutsch',es:'Español',fr:'Français',it:'Italiano',ja:'日本語',ko:'한국어',nl:'Nederlands',pl:'Polski','pt-BR':'Português (Brasil)',ru:'Русский','zh-CN':'中文(简体)','zh-TW':'中文(繁體)',id:'Bahasa Indonesia',vi:'Tiếng Việt',ar:'العربية'};
+  var EN={title:document.title,description:document.querySelector('meta[name=description]').content,language:'Language'};
+  document.querySelectorAll('[data-i]').forEach(function (e) { EN[e.getAttribute('data-i')] = e.innerHTML; });
+  var cache={en:EN}, sel=document.getElementById('lang');
+  sel.innerHTML=Object.keys(NAMES).map(function (l) { return '<option value="'+l+'">'+NAMES[l]+'</option>'; }).join('');
+  function pick() {
+    var q=new URLSearchParams(location.search).get('lang');
+    if (q && NAMES[q]) return q;
+    try { var s=localStorage.getItem('lang'); if (s && NAMES[s]) return s; } catch (e) {}
+    var ls=navigator.languages||[navigator.language||'en'];
+    for (var i=0;i<ls.length;i++) {
+      var t=ls[i].toLowerCase();
+      if (t.indexOf('zh')===0) return /hant|tw|hk|mo/.test(t)?'zh-TW':'zh-CN';
+      if (t.indexOf('pt')===0) return 'pt-BR';
+      var b=t.split('-')[0]; if (b==='in') b='id';
+      if (NAMES[b]) return b;
+    }
+    return 'en';
+  }
+  function show(l, d) {
+    document.querySelectorAll('[data-i]').forEach(function (e) { var k=e.getAttribute('data-i'); e.innerHTML = d[k] || EN[k]; });
+    document.title = d.title || EN.title;
+    document.querySelector('meta[name=description]').content = d.description || EN.description;
+    sel.setAttribute('aria-label', d.language || EN.language);
+    document.documentElement.lang = l;
+    document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+    sel.value = l;
+  }
+  function load(l) {
+    if (cache[l]) { show(l, cache[l]); return; }
+    fetch('i18n/' + l + '.json').then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (d) { cache[l] = d; show(l, d); })
+      .catch(function () { show('en', EN); });
+  }
+  sel.addEventListener('change', function () { try { localStorage.setItem('lang', sel.value); } catch (e) {} load(sel.value); });
+  load(pick());
 })();
 </script>
 </body>

@@ -9,3 +9,6 @@ https://celix-apps.github.io/shiftmate/
 - `img/<lang>/01.jpg … 06.jpg`: the first six store screenshots per language, 720×1280.
 
 The App Store button links to https://apps.apple.com/app/id6764603778 (storefront-neutral, redirects to the visitor's country).
+- `support/index.html`: help page in 17 languages. The English text is inline; every translatable element has a
+  `data-i` key and `support/i18n/<lang>.json` holds the same keys (HTML kept as in English, menu paths taken from
+  the app's own strings). When an English answer changes, update the same key in every JSON file.
