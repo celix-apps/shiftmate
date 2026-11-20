@@ -42,7 +42,7 @@ button{font:inherit}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;text-decoration:none;letter-spacing:-.01em}
 .brand img{width:32px;height:32px;border-radius:8px}
 nav.main{display:flex;gap:22px;margin-inline-start:14px}
-nav.main a{font-size:14px;color:var(--muted);text-decoration:none;font-weight:500}
+nav.main a{font-size:14px;color:var(--muted);text-decoration:none;font-weight:500;white-space:nowrap}
 nav.main a:hover{color:var(--text)}
 .spacer{flex:1}
 select{font:inherit;font-size:14px;padding:7px 30px 7px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a93a8' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;color:var(--text);appearance:none;-webkit-appearance:none;max-width:40vw}
@@ -52,7 +52,6 @@ select{font:inherit;font-size:14px;padding:7px 30px 7px 12px;border-radius:10px;
 .top .drawer{display:none;height:auto;border-top:1px solid var(--line);padding:8px 24px 14px}
 .drawer a{display:block;padding:10px 0;font-weight:600;text-decoration:none}
 .top.open .drawer{display:block}
-@media (min-width:981px){.top.open .drawer{display:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 22px;border-radius:14px;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;transition:transform .15s ease,box-shadow .15s ease}
 .btn svg{width:20px;height:20px;flex:none}
 .btn:hover{transform:translateY(-1px)}
@@ -202,9 +201,10 @@ footer a:hover{color:var(--text)}
 .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media (max-width:1120px){nav.main{display:none}.menu{display:inline-flex}.top .drawer{padding-inline:24px}}
+@media (min-width:1121px){.top.open .drawer{display:none}}
 @media (max-width:980px){
-  nav.main,.top .btn.sm{display:none}
-  .menu{display:inline-flex}
+  .top .btn.sm{display:none}
   .hero{padding:36px 0 56px}
   .hero .wrap{grid-template-columns:1fr;gap:28px}
   .stage{height:460px}
