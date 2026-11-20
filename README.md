@@ -12,9 +12,11 @@ https://celix-apps.github.io/shiftmate/
     iPhone tab is selected (default on iPhone/iPad, `?p=ios|android`, remembered).
   - `img/widgets/<android|ios>/<lang>/{large,earn,today,leave}.webp`: widgets for the Widgets section. iOS ones are
     cut from 07_Widgets; Android ones come from the raw widget captures of the Play screenshot tooling.
-  - `img/ios/extras/<en|tr>/{island,lockcard}.jpg`: Dynamic Island and Lock Screen close-ups (iPhone only).
+  - `img/ios/extras/<en|tr>/island_<state>.webp` (compact Dynamic Island: countdown, earnings, progress, offday,
+    alarm_snooze) and `lockcard.jpg` (Lock Screen Live Activity + widgets), iPhone only.
 
 The App Store button links to https://apps.apple.com/app/id6764603778 (storefront-neutral, redirects to the visitor's country).
-- `support/index.html`: help page in 17 languages. The English text is inline; every translatable element has a
+- `support/index.html`: help page in 17 languages, same header as the home page; the iPhone & iPad / Android switch
+  sits next to the language picker and shares the `platform` choice (localStorage) with the home page. The English text is inline; every translatable element has a
   `data-i` key and `support/i18n/<lang>.json` holds the same keys (HTML kept as in English, menu paths taken from
   the app's own strings). When an English answer changes, update the same key in every JSON file.
