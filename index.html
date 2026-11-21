@@ -82,13 +82,13 @@ h1 .grad{background:linear-gradient(90deg,var(--brand),var(--violet));-webkit-ba
 .stage{position:relative;height:600px}
 .shot{position:absolute;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);background:#1a1f2b;cursor:zoom-in;border:0;padding:0}
 .shot img{width:100%;height:100%;object-fit:cover}
-.stage .shot{aspect-ratio:9/16}
-.plat-ios .stage .shot,.plat-ios .fx-view .shot{aspect-ratio:1080/2340}
-.stage .s1{width:290px;left:calc(50% - 145px);top:20px;z-index:3}
-.stage .s2{width:220px;left:calc(50% - 275px);top:90px;transform:rotate(-7deg);z-index:2}
-.stage .s3{width:220px;left:calc(50% + 55px);top:90px;transform:rotate(7deg);z-index:2}
-.plat-ios .stage .s1{width:260px;left:calc(50% - 130px)}
-.plat-ios .stage .s2,.plat-ios .stage .s3{width:200px}
+.stage .shot{aspect-ratio:9/18.5}
+/* Android (9:16) ve iPhone (9:19.5) görselleri aynı 9:18.5 kutuda: geçişte kutu boyu değişmez, yalnızca arka plan kenarları kırpılır */
+.shot img{transition:opacity .22s ease}
+.fading .shot img,.fading #bento img{opacity:0}
+.stage .s1{width:270px;left:calc(50% - 135px);top:20px;z-index:3}
+.stage .s2{width:210px;left:calc(50% - 265px);top:90px;transform:rotate(-7deg);z-index:2}
+.stage .s3{width:210px;left:calc(50% + 55px);top:90px;transform:rotate(7deg);z-index:2}
 @media (prefers-reduced-motion:no-preference){
   .stage .s1{animation:float 7s ease-in-out infinite}
   @keyframes float{0%,100%{translate:0 0}50%{translate:0 -10px}}
@@ -124,7 +124,7 @@ h2{font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.025em;marg
 .fx-item li:before,.fx-text li:before{content:"";position:absolute;inset-inline-start:0;top:.3em;width:15px;height:15px;border-radius:50%;background:var(--brand-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A6CFF' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") no-repeat center/10px}
 .fx-view{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px}
 /* iki platformda aynı yükseklik: geçişte sayfa kısalıp uzamaz */
-.fx-view .shot{position:relative;height:600px;width:auto;aspect-ratio:9/16}
+.fx-view .shot{position:relative;height:600px;width:auto;aspect-ratio:9/18.5}
 .fx-text{display:none}
 /* widget vitrini */
 .widgets{position:relative;overflow:hidden;background:radial-gradient(900px 500px at 85% -10%,rgba(91,140,255,.45),transparent 60%),radial-gradient(700px 500px at 0% 110%,rgba(160,90,255,.35),transparent 60%),linear-gradient(160deg,#151036 0%,#251a5e 55%,#35237f 100%);color:#fff}
@@ -136,7 +136,9 @@ h2{font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.025em;marg
 .widgets .seg button{color:rgba(255,255,255,.7)}
 .widgets .seg button[aria-pressed="true"]{background:#fff;color:#1b1446}
 .bento{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;max-width:980px;margin:0 auto}
-.bento img{width:100%;height:auto;filter:drop-shadow(0 24px 36px rgba(0,0,0,.45))}
+.bento img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 24px 36px rgba(0,0,0,.45));transition:opacity .22s ease}
+/* widget yuvaları iki platformda aynı boyda (iPhone ölçüleri); Android widget'ı yuvanın ortasında durur */
+.bento .sl-large{aspect-ratio:960/1001}.bento .sl-earn{aspect-ratio:960/451}.bento .sl-sq{aspect-ratio:1}
 .bento .col{display:grid;gap:28px}
 .bento .pair{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .lockrow{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:980px;margin:72px auto 0}
@@ -191,6 +193,7 @@ footer a:hover{color:var(--text)}
 /* kaydırınca beliren öğeler (yalnız JS varken) */
 .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.shot img,.bento img{transition:none}}
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 @media (max-width:1120px){nav.main{display:none}.menu{display:inline-flex}.top .drawer{padding-inline:24px}}
 @media (min-width:1121px){.top.open .drawer{display:none}}
@@ -199,8 +202,8 @@ footer a:hover{color:var(--text)}
   .hero{padding:36px 0 56px}
   .hero .wrap{grid-template-columns:1fr;gap:28px}
   .stage{height:460px}
-  .stage .s1,.plat-ios .stage .s1{width:min(56vw,220px);left:calc(50% - min(28vw,110px));top:10px}
-  .stage .s2,.stage .s3,.plat-ios .stage .s2,.plat-ios .stage .s3{width:min(40vw,160px);top:70px}
+  .stage .s1{width:min(52vw,210px);left:calc(50% - min(26vw,105px));top:10px}
+  .stage .s2,.stage .s3{width:min(38vw,150px);top:70px}
   .stage .s2{left:calc(50% - min(48vw,190px))}.stage .s3{left:auto;right:calc(50% - min(48vw,190px))}
   section.block{padding:64px 0}
   .fx{grid-template-columns:1fr;gap:20px}
@@ -406,9 +409,11 @@ function pick(){
   return 'en';
 }
 const ios=()=>plat==='ios';
-const base=()=>(ios()?'img/ios/':'img/')+lang+'/';
-const full=n=>base()+'0'+n+'.jpg';
-const thumb=n=>base()+'t/0'+n+'.jpg';
+const base=(p=plat)=>(p==='ios'?'img/ios/':'img/')+lang+'/';
+const full=(n,p)=>base(p)+'0'+n+'.jpg';
+const thumb=(n,p)=>base(p)+'t/0'+n+'.jpg';
+const wbase=(p=plat)=>'img/widgets/'+(p==='ios'?'ios':'android')+'/'+lang+'/';
+const WIDGETS=['large','earn','today','leave'];
 const set=(id,v)=>{const e=$(id);if(e)e.textContent=v};
 function render(l){
   lang=l;const d=D[l],x=d.iphone,u=d.ui;
@@ -437,8 +442,8 @@ function render(l){
   $('fxList').innerHTML=feats.map((f,i)=>'<button class="fx-item" role="tab" data-i="'+i+'"><div class="icon">'+svg(ICONS[i%ICONS.length])+'</div><div><h3>'+esc(f.h)+'</h3><ul>'+f.b.map(b=>'<li>'+esc(b)+'</li>').join('')+'</ul></div></button>').join('');
   $('fxList').feats=feats;selectFx(Math.min(fx,feats.length-1),false);
   // widget'lar
-  const w='img/widgets/'+(ios()?'ios':'android')+'/'+l+'/',wi=(n,alt)=>'<img src="'+w+n+'.webp" alt="'+esc(alt)+'" loading="lazy">';
-  $('bento').innerHTML='<div>'+wi('large',u.wTitle)+'</div><div class="col">'+wi('earn','')+'<div class="pair">'+wi('today','')+wi('leave','')+'</div></div>';
+  const w=wbase(),wi=(n,alt,c)=>'<div class="'+c+'"><img src="'+w+n+'.webp" alt="'+esc(alt)+'" loading="lazy"></div>';
+  $('bento').innerHTML=wi('large',u.wTitle,'sl-large')+'<div class="col">'+wi('earn','','sl-earn')+'<div class="pair">'+wi('today','','sl-sq')+wi('leave','','sl-sq')+'</div></div>';
   const xb='img/ios/extras/'+(l==='tr'?'tr':'en')+'/';
   $('xLock').src=xb+'lockcard.jpg?v=2';
   $('pills').innerHTML=['countdown','earnings','progress','offday','alarm_snooze'].map((k,i)=>'<div class="pill"><span>'+esc(u.islands[i])+(i<4?'<b class="badge s">PRO</b>':'')+'</span><img src="'+xb+'island_'+k+'.webp" alt="'+esc(u.islands[i])+'" loading="lazy"></div>').join('');
@@ -480,7 +485,24 @@ lb.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches
 const sel=$('lang');
 sel.innerHTML=Object.keys(D).map(l=>'<option value="'+l+'">'+D[l].label+'</option>').join('');
 sel.addEventListener('change',e=>{const l=e.target.value;try{localStorage.setItem('lang',l)}catch(x){}render(l)});
-document.addEventListener('click',e=>{const b=e.target.closest('.seg button');if(!b||b.dataset.p===plat)return;plat=b.dataset.p;try{localStorage.setItem('platform',plat)}catch(x){}render(lang)});
+// platform geçişi: kutular yerinde kalır, görseller söner, yenileri yüklenince belirir
+const warmed=new Set();
+function warm(p){const k=p+lang;if(p===plat||warmed.has(k))return;warmed.add(k);
+  [full(1,p),thumb(3,p),thumb(7,p),full(FX_SHOT[fx],p)].concat(WIDGETS.map(n=>wbase(p)+n+'.webp')).forEach(u=>{new Image().src=u})}
+let swapT=0,next=null;
+function setPlat(p){
+  if(p===(next||plat))return;
+  try{localStorage.setItem('platform',p)}catch(x){}
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.p===p)));
+  const root=document.documentElement;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){plat=p;render(lang);return}
+  warm(p);root.classList.add('fading');clearTimeout(swapT);next=p;
+  swapT=setTimeout(()=>{plat=p;next=null;render(lang);
+    const imgs=[...document.querySelectorAll('#stage img,#fxImg,#bento img')].map(i=>i.decode?i.decode().catch(()=>{}):0);
+    Promise.race([Promise.all(imgs),new Promise(r=>setTimeout(r,600))]).then(()=>root.classList.remove('fading'))},220);
+}
+document.addEventListener('click',e=>{const b=e.target.closest('.seg button');if(b)setPlat(b.dataset.p)});
+document.addEventListener('pointerover',e=>{const b=e.target.closest&&e.target.closest('.seg button');if(b)warm(b.dataset.p)});
 render(pick());
 // kaydırınca belirme
 if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{rootMargin:'0px 0px -8% 0px'});document.querySelectorAll('.reveal').forEach(el=>io.observe(el))}
