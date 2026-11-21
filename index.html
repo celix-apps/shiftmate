@@ -84,8 +84,10 @@ h1 .grad{background:linear-gradient(90deg,var(--brand),var(--violet));-webkit-ba
 .shot img{width:100%;height:100%;object-fit:cover}
 .stage .shot{aspect-ratio:9/18.5}
 /* Android (9:16) ve iPhone (9:19.5) görselleri aynı 9:18.5 kutuda: geçişte kutu boyu değişmez, yalnızca arka plan kenarları kırpılır */
-.shot img{transition:opacity .22s ease}
-.fading .shot img,.fading #bento img{opacity:0}
+.shot .ghost{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;transition:opacity .28s ease}
+#bento{position:relative}
+.bento.ghost{position:absolute;inset:0;margin:0;max-width:none;pointer-events:none;transition:opacity .28s ease}
+.ghost.out{opacity:0}
 .stage .s1{width:270px;left:calc(50% - 135px);top:20px;z-index:3}
 .stage .s2{width:210px;left:calc(50% - 265px);top:90px;transform:rotate(-7deg);z-index:2}
 .stage .s3{width:210px;left:calc(50% + 55px);top:90px;transform:rotate(7deg);z-index:2}
@@ -136,7 +138,7 @@ h2{font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.025em;marg
 .widgets .seg button{color:rgba(255,255,255,.7)}
 .widgets .seg button[aria-pressed="true"]{background:#fff;color:#1b1446}
 .bento{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;max-width:980px;margin:0 auto}
-.bento img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 24px 36px rgba(0,0,0,.45));transition:opacity .22s ease}
+.bento img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 24px 36px rgba(0,0,0,.45))}
 /* widget yuvaları iki platformda aynı boyda (iPhone ölçüleri); Android widget'ı yuvanın ortasında durur */
 .bento .sl-large{aspect-ratio:960/1001}.bento .sl-earn{aspect-ratio:960/451}.bento .sl-sq{aspect-ratio:1}
 .bento .col{display:grid;gap:28px}
@@ -193,7 +195,6 @@ footer a:hover{color:var(--text)}
 /* kaydırınca beliren öğeler (yalnız JS varken) */
 .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .js .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.shot img,.bento img{transition:none}}
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 @media (max-width:1120px){nav.main{display:none}.menu{display:inline-flex}.top .drawer{padding-inline:24px}}
 @media (min-width:1121px){.top.open .drawer{display:none}}
@@ -485,21 +486,30 @@ lb.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches
 const sel=$('lang');
 sel.innerHTML=Object.keys(D).map(l=>'<option value="'+l+'">'+D[l].label+'</option>').join('');
 sel.addEventListener('change',e=>{const l=e.target.value;try{localStorage.setItem('lang',l)}catch(x){}render(l)});
-// platform geçişi: kutular yerinde kalır, görseller söner, yenileri yüklenince belirir
-const warmed=new Set();
-function warm(p){const k=p+lang;if(p===plat||warmed.has(k))return;warmed.add(k);
-  [full(1,p),thumb(3,p),thumb(7,p),full(FX_SHOT[fx],p)].concat(WIDGETS.map(n=>wbase(p)+n+'.webp')).forEach(u=>{new Image().src=u})}
-let swapT=0,next=null;
+// platform geçişi: yeni görseller arka planda hazırlanırken eskisi ekranda kalır; hazır olunca eskisi yenisinin üstünden söner (boş kart görünmez)
+const srcsFor=p=>[full(1,p),thumb(3,p),thumb(7,p),full(FX_SHOT[fx],p)].concat(WIDGETS.map(n=>wbase(p)+n+'.webp'));
+const loaded={};
+const load=u=>loaded[u]||(loaded[u]=new Promise(res=>{const i=new Image();i.onload=()=>(i.decode?i.decode():Promise.resolve()).catch(()=>{}).then(res);i.onerror=res;i.src=u}));
+function warm(p){if(p!==plat)srcsFor(p).forEach(load)}
+let want=null;
 function setPlat(p){
-  if(p===(next||plat))return;
+  if(p===(want||plat))return;
+  want=p;
   try{localStorage.setItem('platform',p)}catch(x){}
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.p===p)));
-  const root=document.documentElement;
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches){plat=p;render(lang);return}
-  warm(p);root.classList.add('fading');clearTimeout(swapT);next=p;
-  swapT=setTimeout(()=>{plat=p;next=null;render(lang);
-    const imgs=[...document.querySelectorAll('#stage img,#fxImg,#bento img')].map(i=>i.decode?i.decode().catch(()=>{}):0);
-    Promise.race([Promise.all(imgs),new Promise(r=>setTimeout(r,600))]).then(()=>root.classList.remove('fading'))},220);
+  Promise.race([Promise.all(srcsFor(p).map(load)),new Promise(r=>setTimeout(r,700))]).then(()=>{
+    if(want!==p)return;want=null;if(p===plat)return;
+    const ghosts=[],calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    let wg=null;
+    if(!calm){
+      document.querySelectorAll('#stage .shot,#fxShot').forEach(b=>{const g=b.querySelector('img').cloneNode();g.removeAttribute('id');g.alt='';g.className='ghost';b.appendChild(g);ghosts.push(g)});
+      wg=document.createElement('div');wg.className='bento ghost';wg.setAttribute('aria-hidden','true');wg.append(...$('bento').children);ghosts.push(wg);
+    }
+    plat=p;render(lang);
+    if(wg)$('bento').appendChild(wg);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>ghosts.forEach(g=>g.classList.add('out'))));
+    setTimeout(()=>ghosts.forEach(g=>g.remove()),400);
+  });
 }
 document.addEventListener('click',e=>{const b=e.target.closest('.seg button');if(b)setPlat(b.dataset.p)});
 document.addEventListener('pointerover',e=>{const b=e.target.closest&&e.target.closest('.seg button');if(b)warm(b.dataset.p)});
