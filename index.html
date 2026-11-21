@@ -120,14 +120,27 @@ h2{font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.025em;marg
 .icon{width:44px;height:44px;border-radius:12px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;flex:none}
 .icon svg{width:22px;height:22px}
 .fx-item h3{font-size:13px;font-weight:700;letter-spacing:.06em;margin:11px 0 0;color:var(--text)}
-.fx-item ul{display:none;list-style:none;margin:10px 0 2px;padding:0}
-.fx-item[aria-selected="true"] ul{display:block}
+.fx-item>div{min-width:0}
+.fx-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.fx-item[aria-selected="true"] .fx-more{grid-template-rows:1fr}
+.fx-item ul{list-style:none;margin:0;padding:10px 0 2px;overflow:hidden;min-height:0}
 .fx-item li,.fx-text li{position:relative;padding-inline-start:24px;margin:7px 0;color:var(--muted);font-size:15px;line-height:1.5}
 .fx-item li:before,.fx-text li:before{content:"";position:absolute;inset-inline-start:0;top:.3em;width:15px;height:15px;border-radius:50%;background:var(--brand-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A6CFF' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") no-repeat center/10px}
 .fx-view{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px}
 /* iki platformda aynı yükseklik: geçişte sayfa kısalıp uzamaz */
 .fx-view .shot{position:relative;height:600px;width:auto;aspect-ratio:9/18.5}
 .fx-text{display:none}
+/* masaüstünde kaydırmalı gezgin: bölüm ekrana yapışır, kaydırdıkça sıradaki özellik seçilir; son özellikten sonra sayfa normal iner */
+.fx-scroll #features{padding-bottom:0}
+.fx-scroll #features .head{margin-bottom:0}
+.fx-scroll .fx-track{height:calc(100vh - 65px + var(--fxn,6) * 38vh)}
+.fx-scroll .fx{position:sticky;top:65px;height:calc(100vh - 65px);box-sizing:border-box;padding-block:20px}
+.fx-scroll .fx-view .shot{height:clamp(360px,calc(100vh - 180px),600px)}
+.fx-scroll .fx-list{gap:6px}
+.fx-scroll .fx-item{position:relative;padding:10px 16px}
+.fx-scroll .fx-item .icon{width:38px;height:38px}
+.fx-scroll .fx-item h3{margin-top:9px}
+.fx-scroll .fx-item[aria-selected="true"]:after{content:"";position:absolute;inset-inline-start:16px;bottom:-1px;height:2px;width:calc(var(--fxp,0) * (100% - 32px));background:var(--brand);border-radius:2px;opacity:.7}
 /* widget vitrini */
 .widgets{position:relative;overflow:hidden;background:radial-gradient(900px 500px at 85% -10%,rgba(91,140,255,.45),transparent 60%),radial-gradient(700px 500px at 0% 110%,rgba(160,90,255,.35),transparent 60%),linear-gradient(160deg,#151036 0%,#251a5e 55%,#35237f 100%);color:#fff}
 .widgets .kicker{color:#b9a8ff}
@@ -218,7 +231,7 @@ footer a:hover{color:var(--text)}
   .fx-item[aria-selected="true"]{background:var(--brand);border-color:var(--brand);box-shadow:none}
   .fx-item[aria-selected="true"] h3{color:#fff}
   .fx-item[aria-selected="true"] .icon{background:rgba(255,255,255,.2);color:#fff}
-  .fx-item[aria-selected="true"] ul{display:none}
+  .fx-more{display:none}
   .fx-view .shot{height:440px}
   .fx-text{display:block;min-height:8.5em}
   .fx-text ul{list-style:none;margin:0 auto;padding:0;max-width:440px}
@@ -289,13 +302,13 @@ footer a:hover{color:var(--text)}
 <section class="block soft" id="features">
   <div class="wrap">
     <div class="head reveal"><div class="kicker" id="kFeatures">Features</div><h2 id="tFeatures">Built for shift work</h2></div>
-    <div class="fx reveal" id="screenshots">
+    <div class="fx-track" id="fxTrack"><div class="fx reveal" id="screenshots">
       <div class="fx-list" id="fxList" role="tablist"></div>
       <div>
         <div class="fx-view"><button class="shot" id="fxShot"><img id="fxImg" alt="" width="1080" height="1920"></button><div class="seg"></div></div>
         <div class="fx-text" id="fxText"></div>
       </div>
-    </div>
+    </div></div>
   </div>
 </section>
 
@@ -440,7 +453,7 @@ function render(l){
   document.querySelectorAll('#stage .shot').forEach(b=>{const n=+b.dataset.n,img=b.querySelector('img');img.src=b.classList.contains('s1')?full(n):thumb(n);img.alt=d.name});
   // özellikler
   const feats=d.features.map((f,i)=>({h:f.h,b:(ios()&&i===4&&f.b[2])?[f.b[0],f.b[1],u.iosHealth]:f.b}));
-  $('fxList').innerHTML=feats.map((f,i)=>'<button class="fx-item" role="tab" data-i="'+i+'"><div class="icon">'+svg(ICONS[i%ICONS.length])+'</div><div><h3>'+esc(f.h)+'</h3><ul>'+f.b.map(b=>'<li>'+esc(b)+'</li>').join('')+'</ul></div></button>').join('');
+  $('fxList').innerHTML=feats.map((f,i)=>'<button class="fx-item" role="tab" data-i="'+i+'"><div class="icon">'+svg(ICONS[i%ICONS.length])+'</div><div><h3>'+esc(f.h)+'</h3><div class="fx-more"><ul>'+f.b.map(b=>'<li>'+esc(b)+'</li>').join('')+'</ul></div></div></button>').join('');
   $('fxList').feats=feats;selectFx(Math.min(fx,feats.length-1),false);
   // widget'lar
   const w=wbase(),wi=(n,alt,c)=>'<div class="'+c+'"><img src="'+w+n+'.webp" alt="'+esc(alt)+'" loading="lazy"></div>';
@@ -455,14 +468,20 @@ function render(l){
   document.querySelectorAll('.seg').forEach(s=>{if(!s.children.length)s.innerHTML=SEG;[...s.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.p===plat)))});
   $('lang').value=l;$('langCode').textContent=CODE[l]||l.toUpperCase();
 }
-function selectFx(i,user){
-  fx=i;const feats=$('fxList').feats;
+function selectFx(i,user,anim){
+  fx=i;const feats=$('fxList').feats,img=$('fxImg'),src=full(FX_SHOT[i]);
   [...$('fxList').children].forEach((b,j)=>b.setAttribute('aria-selected',String(j===i)));
-  $('fxImg').src=full(FX_SHOT[i]);$('fxImg').alt=feats[i].h;
+  img.alt=feats[i].h;
+  if(!anim)img.src=src;
+  else if(img.getAttribute('src')!==src)load(src).then(()=>{if(fx!==i||img.getAttribute('src')===src)return;
+    const g=img.cloneNode();g.removeAttribute('id');g.alt='';g.className='ghost';$('fxShot').appendChild(g);img.src=src;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>g.classList.add('out')));setTimeout(()=>g.remove(),400)});
   $('fxText').innerHTML='<ul>'+feats[i].b.map(b=>'<li>'+esc(b)+'</li>').join('')+'</ul>';
   if(user&&matchMedia('(max-width:980px)').matches){const b=$('fxList').children[i];$('fxList').scrollTo({left:b.offsetLeft-$('fxList').clientWidth/2+b.offsetWidth/2,behavior:'smooth'})}
 }
-$('fxList').addEventListener('click',e=>{const b=e.target.closest('.fx-item');if(b)selectFx(+b.dataset.i,true)});
+$('fxList').addEventListener('click',e=>{const b=e.target.closest('.fx-item');if(!b)return;const i=+b.dataset.i;
+  if(fxOn()){const r=$('fxTrack').getBoundingClientRect(),n=$('fxList').children.length,d=r.height-(innerHeight-65);scrollTo({top:scrollY+r.top-65+d*(i+.5)/n,behavior:'smooth'})}
+  else selectFx(i,true)});
 $('fxShot').addEventListener('click',()=>openLb(gallery.indexOf(FX_SHOT[fx])));
 $('stage').addEventListener('click',e=>{const b=e.target.closest('.shot');if(b)openLb(gallery.indexOf(+b.dataset.n))});
 document.querySelectorAll('a.play').forEach(a=>a.href=PLAY);
@@ -485,7 +504,7 @@ lb.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches
 // dil ve platform
 const sel=$('lang');
 sel.innerHTML=Object.keys(D).map(l=>'<option value="'+l+'">'+D[l].label+'</option>').join('');
-sel.addEventListener('change',e=>{const l=e.target.value;try{localStorage.setItem('lang',l)}catch(x){}render(l)});
+sel.addEventListener('change',e=>{const l=e.target.value;try{localStorage.setItem('lang',l)}catch(x){}render(l);fxMode()});
 // platform geçişi: yeni görseller arka planda hazırlanırken eskisi ekranda kalır; hazır olunca eskisi yenisinin üstünden söner (boş kart görünmez)
 const srcsFor=p=>[full(1,p),thumb(3,p),thumb(7,p),full(FX_SHOT[fx],p)].concat(WIDGETS.map(n=>wbase(p)+n+'.webp'));
 const loaded={};
@@ -514,6 +533,32 @@ function setPlat(p){
 document.addEventListener('click',e=>{const b=e.target.closest('.seg button');if(b)setPlat(b.dataset.p)});
 document.addEventListener('pointerover',e=>{const b=e.target.closest&&e.target.closest('.seg button');if(b)warm(b.dataset.p)});
 render(pick());
+// kaydırmalı özellik gezgini (geniş ekran, hareket azaltma kapalı, ekran yeterince yüksek)
+const fxMQ=matchMedia('(min-width:981px) and (prefers-reduced-motion:no-preference)');
+function fxOn(){return document.documentElement.classList.contains('fx-scroll')}
+const fxWarm=new Set();
+function fxTick(){
+  if(!fxOn())return;const n=$('fxList').children.length;if(!n)return;
+  const r=$('fxTrack').getBoundingClientRect(),d=r.height-(innerHeight-65);
+  const p=d>0?Math.min(1,Math.max(0,(65-r.top)/d)):0,i=Math.min(n-1,Math.floor(p*n));
+  document.documentElement.style.setProperty('--fxp',Math.min(1,p*n-i).toFixed(3));
+  if(r.top<innerHeight*1.5&&r.bottom>0){const k=plat+lang;if(!fxWarm.has(k)){fxWarm.add(k);FX_SHOT.forEach(m=>load(full(m)))}}
+  if(i!==fx)selectFx(i,false,true);
+}
+function fxMode(){
+  const h=document.documentElement;
+  h.style.setProperty('--fxn',$('fxList').children.length||6);
+  h.classList.toggle('fx-scroll',fxMQ.matches);
+  // liste (en uzun açık maddeyle) ekrana sığmıyorsa tıklamalı gezgine dön
+  if(fxOn()){const L=$('fxList'),open=L.querySelector('[aria-selected="true"] ul'),extra=open?Math.max(0,140-open.offsetHeight):140;
+    if(L.offsetHeight+extra+40>innerHeight-65)h.classList.remove('fx-scroll')}
+  fxTick();
+}
+let fxRaf=0;
+addEventListener('scroll',()=>{if(!fxRaf)fxRaf=requestAnimationFrame(()=>{fxRaf=0;fxTick()})},{passive:true});
+addEventListener('resize',fxMode);
+if(fxMQ.addEventListener)fxMQ.addEventListener('change',fxMode);else if(fxMQ.addListener)fxMQ.addListener(fxMode);
+fxMode();
 // kaydırınca belirme
 if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{rootMargin:'0px 0px -8% 0px'});document.querySelectorAll('.reveal').forEach(el=>io.observe(el))}
 else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
