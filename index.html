@@ -50,8 +50,8 @@ nav.main a:hover{color:var(--text)}
 .lang svg{width:17px;height:17px;color:var(--muted)}
 .lang select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px;border:0}
 .lang:focus-within{outline:2px solid var(--brand);outline-offset:2px}
-.menu{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);align-items:center;justify-content:center;cursor:pointer}
-.menu svg{width:20px;height:20px}
+.menu{display:none;width:40px;height:40px;padding:0;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);align-items:center;justify-content:center;cursor:pointer}
+.menu svg{width:20px;height:20px;flex:none}
 .top .drawer{display:none;height:auto;border-top:1px solid var(--line);padding:8px 24px 14px}
 .drawer a{display:block;padding:10px 0;font-weight:600;text-decoration:none}
 .top.open .drawer{display:block}
@@ -177,9 +177,9 @@ h2{font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.025em;marg
 .lb{position:fixed;inset:0;z-index:50;background:rgba(6,8,14,.92);display:flex;align-items:center;justify-content:center;direction:ltr;touch-action:pan-y}
 .lb[hidden]{display:none}
 .lb img{max-height:calc(100vh - 100px);max-width:min(92vw,560px);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.6);user-select:none;-webkit-user-drag:none}
-.lb button{position:absolute;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.lb button{position:absolute;width:48px;height:48px;padding:0;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .lb button:hover{background:rgba(255,255,255,.22)}
-.lb button svg{width:22px;height:22px}
+.lb button svg{width:22px;height:22px;flex:none}
 .lb .x{top:16px;right:16px}
 .lb .lp{left:20px;top:calc(50% - 24px)}.lb .ln{right:20px;top:calc(50% - 24px)}
 .lb .count{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:rgba(255,255,255,.7);font-size:14px;font-weight:600}
@@ -211,7 +211,15 @@ footer a:hover{color:var(--text)}
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 @media (max-width:1120px){nav.main{display:none}.menu{display:inline-flex}.top .drawer{padding-inline:24px}}
 @media (min-width:1121px){.top.open .drawer{display:none}}
-@media (max-width:980px){
+/* telefonda "masaüstü sitesi" 980 px genişlik verir: 960'tan itibaren masaüstü düzeni, görseller sütuna sığacak boyda */
+@media (min-width:960px) and (max-width:1120px){
+  .stage .s1{width:240px;left:calc(50% - 120px);top:40px}
+  .stage .s2{width:170px;left:calc(50% - 205px);top:120px}
+  .stage .s3{width:170px;left:calc(50% + 35px);top:120px}
+}
+/* dik ve uzun ekran (telefonda masaüstü sitesi, dik tablet): giriş ekran boyuna uzamaz */
+@media (min-width:960px) and (max-aspect-ratio:4/5){.hero{min-height:0;padding:72px 0}}
+@media (max-width:959px){
   .top .btn.sm{display:none}
   .hero{padding:36px 0 56px}
   .hero .wrap{grid-template-columns:1fr;gap:28px}
@@ -477,7 +485,7 @@ function selectFx(i,user,anim){
     const g=img.cloneNode();g.removeAttribute('id');g.alt='';g.className='ghost';$('fxShot').appendChild(g);img.src=src;
     requestAnimationFrame(()=>requestAnimationFrame(()=>g.classList.add('out')));setTimeout(()=>g.remove(),400)});
   $('fxText').innerHTML='<ul>'+feats[i].b.map(b=>'<li>'+esc(b)+'</li>').join('')+'</ul>';
-  if(user&&matchMedia('(max-width:980px)').matches){const b=$('fxList').children[i];$('fxList').scrollTo({left:b.offsetLeft-$('fxList').clientWidth/2+b.offsetWidth/2,behavior:'smooth'})}
+  if(user&&matchMedia('(max-width:959px)').matches){const b=$('fxList').children[i];$('fxList').scrollTo({left:b.offsetLeft-$('fxList').clientWidth/2+b.offsetWidth/2,behavior:'smooth'})}
 }
 $('fxList').addEventListener('click',e=>{const b=e.target.closest('.fx-item');if(!b)return;const i=+b.dataset.i;
   if(fxOn()){const r=$('fxTrack').getBoundingClientRect(),n=$('fxList').children.length,d=r.height-(innerHeight-65);scrollTo({top:scrollY+r.top-65+d*(i+.5)/n,behavior:'smooth'})}
@@ -533,8 +541,8 @@ function setPlat(p){
 document.addEventListener('click',e=>{const b=e.target.closest('.seg button');if(b)setPlat(b.dataset.p)});
 document.addEventListener('pointerover',e=>{const b=e.target.closest&&e.target.closest('.seg button');if(b)warm(b.dataset.p)});
 render(pick());
-// kaydırmalı özellik gezgini (geniş ekran, hareket azaltma kapalı, ekran yeterince yüksek)
-const fxMQ=matchMedia('(min-width:981px) and (prefers-reduced-motion:no-preference)');
+// kaydırmalı özellik gezgini (geniş ve dik olmayan ekran, hareket azaltma kapalı, ekran yeterince yüksek)
+const fxMQ=matchMedia('(min-width:960px) and (min-aspect-ratio:4/5) and (prefers-reduced-motion:no-preference)');
 function fxOn(){return document.documentElement.classList.contains('fx-scroll')}
 const fxWarm=new Set();
 function fxTick(){

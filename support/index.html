@@ -42,8 +42,8 @@ nav.main a:hover,nav.main a.on{color:var(--text)}
 .switch{display:inline-flex;gap:3px;padding:3px;border-radius:11px;background:var(--bg-soft);border:1px solid var(--line);flex:none}
 .switch button{font-size:13px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:7px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
 .switch button[aria-pressed="true"]{background:var(--brand);color:#fff;box-shadow:0 4px 12px -4px var(--brand)}
-.menu{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);align-items:center;justify-content:center;cursor:pointer;flex:none}
-.menu svg{width:20px;height:20px}
+.menu{display:none;width:38px;height:38px;padding:0;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);align-items:center;justify-content:center;cursor:pointer;flex:none}
+.menu svg{width:20px;height:20px;flex:none}
 .top .drawer{display:none;height:auto;border-top:1px solid var(--line);padding:8px 24px 14px}
 .drawer a{display:block;padding:10px 0;font-weight:600;text-decoration:none;color:var(--text)}
 .top.open .drawer{display:block}
@@ -113,6 +113,23 @@ footer a:hover{color:var(--text)}
   .hero{padding:40px 0 28px}
   .topics{grid-template-columns:1fr}
   .contact .btn{width:100%}
+}
+/* dar telefon: üst çubuk taşmasın */
+@media (max-width:400px){
+  .top .wrap{gap:7px}
+  .top .spacer{display:none}
+  .top .switch{margin-inline-start:auto}
+  .switch button{padding:7px}
+  .lang{padding:0 9px}
+  .lang svg{display:none}
+}
+@media (max-width:359px){
+  html{scroll-padding-top:120px}
+  .top .wrap:not(.drawer){flex-wrap:wrap;height:auto;padding-block:10px}
+  .top .lang{margin-inline-start:auto}
+  .top .switch{order:1;width:100%;margin:0}
+  .switch button{flex:1}
+  h2 span{min-width:0;overflow-wrap:anywhere}
 }
 </style>
 </head>
@@ -298,7 +315,9 @@ footer a:hover{color:var(--text)}
   try { saved = localStorage.getItem('platform') || localStorage.getItem('sm-support-platform'); } catch (e) {}
   var menu = document.getElementById('menu'), top = document.getElementById('top');
   menu.addEventListener('click', function () { var o = top.classList.toggle('open'); menu.setAttribute('aria-expanded', String(o)); });
-  var p = q || saved || (/android/i.test(navigator.userAgent) ? 'android' : 'ios');
+  // Android'de "masaüstü sitesi" açıkken tarayıcı kendini Linux olarak tanıtır; dokunmatik Linux = Android
+  var ua = navigator.userAgent, android = /android/i.test(ua) || (/Linux/.test(ua) && navigator.maxTouchPoints > 0);
+  var p = q || saved || (android ? 'android' : 'ios');
   function set(v, store) {
     b.classList.toggle('android', v === 'android');
     document.querySelectorAll('.switch button').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.p === v)); });
